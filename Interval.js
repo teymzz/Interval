@@ -5,58 +5,69 @@ class Interval {
         this.id = 0;
     }
 
+    /**
+     * 
+     * @param {function} func function to be looped
+     * @param {integer} time interval in seconds
+     * @returns object
+     */
     start(func, time) {
 
-        let interval = this;
-        interval.id++;
-        let currentID = interval.id;
+        let interval, obj, currentID;
 
-        let obj = {
+        interval = this;
+        interval.id++;
+        currentID = interval.id;
+
+        obj = {
             id: currentID,
             nativeID: setTimeout(func, time),
             func: func,
             time: time,
             wait: false,
             clear: function () {
-                if(!this.nativeID) return false;
-                clearTimeout(this.nativeID);
-                delete this.nativeID;
+                if(!obj.nativeID) return false;
+                clearTimeout(obj.nativeID);
+                delete obj.nativeID;
+            },
+            stop: function() {
+                obj.clear();
             },
             pause: function () {
-                if(!this.nativeID) return false;
-                this.wait = true;
+                if(!obj.nativeID) return false;
+                obj.wait = true;
             },
             resume: function(time) {
-               if(!this.nativeID) return false;
-               this.wait = false;
-               this.recall(time);
+               if(!obj.nativeID) return false;
+               obj.wait = false;
+               obj.recall(time);
             }, 
             recall: function(time) {
-               if(!this.nativeID || (this.wait === true)) return false;
-               time = time || this.time || 0;
-               this.nativeID = setTimeout(func, time);
+               if(!obj.nativeID || (obj.wait === true)) return false;
+               time = time || obj.time || 0;
+               obj.nativeID = setTimeout(func, time);
             },
             onvisible: function(callback){
-                if(!this.nativeID) return false;
+                if(!obj.nativeID) return false;
                 document.addEventListener('visibilitychange', function(){ 
                     if(document.visibilityState === 'visible') callback()
                 })
             },
             invisible: function(callback){
-                if(!this.nativeID) return false;
+                if(!obj.nativeID) return false;
                 document.addEventListener('visibilitychange', function(){ 
                     if(document.visibilityState !== 'visible') callback()
                 }) 
             },
             visibility: function(callback){
-                if(!this.nativeID) return false;
+                if(!obj.nativeID) return false;
                 document.addEventListener('visibilitychange', function(){ 
                     callback(document.visibilityState === 'visible')
                 })
             },
             monitor: function(){
-                if(!this.nativeID) return false;
-                let interval = this;
+                if(!obj.nativeID) return false;
+                let interval = obj;
                 document.addEventListener('visibilitychange', function(){ 
                     if(document.visibilityState === 'visible'){
                         interval.resume();
@@ -68,7 +79,7 @@ class Interval {
         } 
 
         interval.data[currentID] = obj;
-        return obj;
+        return interval.data[currentID];
 
     }
 
