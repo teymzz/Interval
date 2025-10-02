@@ -2,6 +2,14 @@
 
 The Interval javascript plugin is used for handling timeout events and loops in a more consise way providing extended functionality for pausing timeouts and managing browser visibilitychange events.
 
+## Installation 
+Download the package directly from the github repository and install the _Interval.js_ plugin into your  
+project framework or alternatively you can install directly using CDN link below.
+
+```html
+<script src="https://cdn.jsdelivr.net/gh/teymzz/Interval@v1.0/Interval.js"></script>
+```
+
 ## Initialization 
 
 Once the package is downloaded, and imported into a project file, the plugin can be intialized as shown below
