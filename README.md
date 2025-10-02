@@ -52,9 +52,9 @@ timeout = interval.start(() => {
 
 > In the code above, the recall method will ensure that the timeout is looped. Both the function defined and the timeout are usually maintained when the recall method is called. This method can either be applied outside or inside the _start()_ method. When it is applied within the function called, it resorts to a timeout loop. It is a good practice to call the _recall_ method after other required operations have been done to avoid conflicting or eager loops.
 
-### Overiding Default Interval
+### Overriding Default Interval
 
-In the previous code, the default timeout interval is _2000_ which is equivalent to 2 seconds. In certain cases where we want to initialize the function called immediately but once the function is called, we need to keep a certain interval space, we can easily do this by overiding the default timeout time by supplying a 
+In the previous code, the default timeout interval is _2000_ which is equivalent to 2 seconds. In certain cases where we want to initialize the function called immediately but once the function is called, we need to keep a certain interval space, we can easily do this by overriding the default timeout time by supplying a 
 new timeout time into the _recall()_ method. This is shown below
 
 ```js 
