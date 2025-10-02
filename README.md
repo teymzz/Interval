@@ -43,8 +43,7 @@ let timeout;
 
 timeout = interval.start(() => {
 
-    console.log('This is timeout event A')
-
+    console.log('This is timeout event A');
     timeout.recall();
 
 }, 2000)
@@ -62,8 +61,7 @@ let timeout;
 
 timeout = interval.start(() => {
 
-    console.log('This is timeout event A')
-
+    console.log('This is timeout event A');
     timeout.recall(2000);
 
 })
@@ -125,7 +123,6 @@ The _Interval_ plugin gives extended functionality for handling browser _onvisib
         console.log(counter++)
 
         timeout.recall(2000);
-
         timeout.monitor(); // applied only once
 
    })
@@ -147,8 +144,7 @@ The _Interval_ plugin gives extended functionality for handling browser _onvisib
 
    timeout = interval.start(() => {
 
-        console.log(counter++)
-
+        console.log(counter++);
         timeout.recall(2000);
 
    })
@@ -189,24 +185,21 @@ The _Interval_ plugin gives extended functionality for handling browser _onvisib
 
    timeout = interval.start(() => {
 
-        console.log(counter++)
-
+        console.log(counter++);
         timeout.recall(2000);
 
    })
    
    timeout.invisible(function(){
      
-     console.log('This page is not visible')
-
+     console.log('This page is not visible');
      timeout.pause();
 
    })
    
    timeout.onvisible(function(){
      
-     console.log('This page was resumed!')
-
+     console.log('This page was resumed!');
      timeout.play();
 
    })
@@ -221,8 +214,7 @@ The _Interval_ plugin gives extended functionality for handling browser _onvisib
 
    timeout = interval.start(() => {
 
-        console.log(counter++)
-
+        console.log(counter++);
         timeout.recall(2000);
 
    });
@@ -231,16 +223,15 @@ The _Interval_ plugin gives extended functionality for handling browser _onvisib
      
      if(isVisible){
 
-        console.log('This page was resumed!')
+        console.log('This page was resumed!');
         timeout.play();
 
      } else {
      
-        console.log('This page is not visible')
+        console.log('This page is not visible');
         timeout.pause();
 
      }
-
 
    })
    ```   
