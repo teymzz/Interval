@@ -69,7 +69,7 @@ timeout = interval.start(() => {
 })
 ```
 
-> In code above, we started the timeout event immediately but ended up overiding the timeout loop with an interval 2 seconds. This means that the function will run instantly and after which it will continue to loop for at 2 seconds interval.
+> In code above, we started the timeout event immediately but ended up overriding the timeout loop with an interval 2 seconds. This means that the function will run instantly and after which it will continue to loop for at 2 seconds interval.
 
 
 ### Ending a loop
