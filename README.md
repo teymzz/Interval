@@ -1,7 +1,6 @@
 # Interval.JS Package
 
-Interval.js is javascript plugin that is used for handling timeout events and loops in a more consise way providing extended functionality for pausing timeouts 
-and managing browser visibilitychange events.
+The Interval javascript plugin is used for handling timeout events and loops in a more consise way providing extended functionality for pausing timeouts and managing browser visibilitychange events.
 
 ## Initialization 
 
@@ -27,7 +26,7 @@ timeout_a = interval.start(() => {
 
 timeout_b = interval.start( () => {
 
-    console.log('This is timeout event A')
+    console.log('This is timeout event B')
     
 }, 3000)
 ```
@@ -78,14 +77,14 @@ timeout = interval.start(() => {
 We can easily end a loop by calling the _stop()_ method. Once this method is called, the timeout event will be terminated. An example is shown below.
 
 ```js 
-let timeout, counter = 0;
+let timeout, counter = 1;
 
 timeout = interval.start(() => {
 
-    console.log(counter++)
+    console.log(counter++);
 
-    if(i > 10) {
-        timeout.stop()
+    if(counter > 10) {
+        timeout.stop();
     }
 
     timeout.recall(2000);
@@ -97,15 +96,13 @@ timeout = interval.start(() => {
 only run 10 times after which it is suspended. We can also rewrite the above code as shown below
 
 ```js 
-let timeout, counter = 0;
+let timeout, counter = 1;
 
 timeout = interval.start(() => {
 
-    console.log(counter++)
+    console.log(counter++);
 
-    if(i > 10) {
-        timeout.recall(2000);
-    }
+    if(counter < 11) timeout.recall(2000);
 
 })
 ```
@@ -118,7 +115,7 @@ The _Interval_ plugin gives extended functionality for handling browser _onvisib
 
    #### Interval Monitor Method
 
-   The _monitor()_ method is an easy way to tell the Interval plugin to introduce a pause and play feature for any loop. This method by default is only allowed to trigger once and once the method is called, when the browser's page is not in view, the loop will be automatically paused and when the page's focus is in view, the paused event will be continued. 
+   The _monitor()_ method allows the a looped timeout to pause when the webpage is not in view and to resume back when the page's focus is in view.
 
    ```js
    let timeout, counter = 0;
@@ -129,20 +126,19 @@ The _Interval_ plugin gives extended functionality for handling browser _onvisib
 
         timeout.recall(2000);
 
-        timeout.monitor();
+        timeout.monitor(); // applied only once
 
    })
    ```
 
-   > In the code above, the _monitor()_ making it possible to execute it within the _start()_ callback function scope. The first function call will trigger the monitor event while other susbsequent loops will be ignored. This event 
-   will pause the loop when the visibility state is not visible and it will play when the page becomes visible. The ability to call the _monitor()_ method within the function scope makes it concise, organized and easy to read.
+   > In the code above, once the _monitor()_ method is initialized from the first callback of _start()_ 
+   method, it will not be re-applied for susbsequent callback loops since it has already been initialized 
+   within that callback scope. The _monitor()_ method will ensure that the timeout loop is paused when the web page visibility state is not visible and it will resume when the page becomes visible. The ability to call the _monitor()_ method within the function scope makes it concise, organized and easy to read.
 
    #### Interval Pause, Play and Stop Methods
 
-   The Plugin allows the flexibility of manually defining when to pause a loop.
-   We can determine when we want to pause the loop and when we need to play it 
-   using the _pause()_ and _play()_ methods. We can also stop the loop by using the _stop()_ method. Assuming we have three buttons with 
-   id of _"pause"_, _"play"_ and _"stop"_ respectively, we can add an event listener for the pausing and resuming of loops. This is shown below
+   We can determine when we want to pause a timeout loop and when we need to play it 
+   using the _pause()_ and _play()_ methods. We can also stop the loop by using the _stop()_ method. Assuming we have three buttons with id of _"pause"_, _"play"_ and _"stop"_ respectively, we can add an event listener for the pausing and resuming of loops. This is shown below
 
    ```js
 
@@ -157,9 +153,9 @@ The _Interval_ plugin gives extended functionality for handling browser _onvisib
 
    })
 
-   pauseButton = document.getElementById('pause');
-   playButton = document.getElementById('play');
-   stopButton = document.getElementById('stop');
+   pauseButton = document.getElementById('pause'); // select a pause button
+   playButton = document.getElementById('play');  // select a play button
+   stopButton = document.getElementById('stop'); // select a stop button
 
    pauseButton.addEventListener('click', function() {
 
@@ -186,8 +182,7 @@ The _Interval_ plugin gives extended functionality for handling browser _onvisib
 
    #### Visibility Methods
 
-   While the plugin offers the automatic pause and resume event through the _monitor()_ method, in situations where we need to customize what happens when 
-   the visibility state of the page changes, this can be handled using the _onvisible()_, _invisible()_ and _visibity()_ methods. The _onvisible()_ callback function is only called when the page is visible after it was initially hidden.
+   While the plugin offers the automatic pause and resume event through the _monitor()_ method, in situations where we need to customize what happens when the visibility state of the page changes, this can be handled using the _onvisible()_, _invisible()_ and _visibity()_ methods. The _onvisible()_ callback function is only called when the page is visible after it was initially hidden.
 
    ```js
    let timeout, counter = 0;
@@ -230,11 +225,7 @@ The _Interval_ plugin gives extended functionality for handling browser _onvisib
 
         timeout.recall(2000);
 
-   })
-   
-   timeout.invisible(function(){
-
-   })
+   });
    
    timeout.onVisibility(function(isVisible){
      
