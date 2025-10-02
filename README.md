@@ -1,4 +1,4 @@
-# Interval.JS Package
+# Interval Package
 
 The Interval javascript plugin is used for handling timeout events and loops in a more consise way providing extended functionality for pausing timeouts and managing browser visibilitychange events.
 
